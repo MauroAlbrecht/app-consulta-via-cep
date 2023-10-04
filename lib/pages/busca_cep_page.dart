@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../model/via_cep_model.dart';
+import '../repository/via_cep_repository.dart';
 
 class BuscaCepPage extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class _BuscaCepPageState extends State<BuscaCepPage> {
   var cepController = TextEditingController(text: '');
   bool loading = false;
   var viaCepModel = ViaCepModel();
+  var viaCepRepository = ViaCepRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +39,7 @@ class _BuscaCepPageState extends State<BuscaCepPage> {
                   });
                   var cep = val.replaceAll(RegExp('r[^0-9]'), '');
                   if (cep.trim().length == 8) {
-                    var response = await http.get(Uri.parse('https://viacep.com.br/ws/$cep/json/'));
-                    var json = jsonDecode(response.body);
-                    viaCepModel = ViaCepModel.fromJson(json);
+                      viaCepModel = await viaCepRepository.consultarCEP(cep);
                   }
 
                   setState(() {
