@@ -32,7 +32,7 @@ class _BuscaCepPageState extends State<BuscaCepPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TextField(  decoration: InputDecoration(labelText: 'CEP',
+                child: TextField(  decoration: const InputDecoration(labelText: 'CEP',
                   labelStyle: TextStyle(fontSize:  22),
                   border: OutlineInputBorder(),
                   hintText: 'Informe o CEP aqui',
